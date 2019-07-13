@@ -17,7 +17,7 @@
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/reveal.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/theme/simple.css" id="theme">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/theme/sky.css" id="theme">
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -13242,28 +13242,35 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Test-for-slides">Test for slides<a class="anchor-link" href="#Test-for-slides">&#182;</a></h2>
+<h1 id="Creating-an-end-to-end-automated-trading-system">Creating an end-to-end automated trading system<a class="anchor-link" href="#Creating-an-end-to-end-automated-trading-system">&#182;</a></h1><h2 id="What-are-we-going-to-build?">What are we going to build?<a class="anchor-link" href="#What-are-we-going-to-build?">&#182;</a></h2><p>A day trading system for trading in National Stock Exchange(NSE).</p>
+<p>Orders would be placed at the start of the day and closed by the end of the day or exit by a stop loss. We would be using the end of the day data as our source data.</p>
+<p>The trading system has four distinct parts</p>
+<ol>
+<li>Creating a trading strategy</li>
+<li>Backtesting and simulation</li>
+<li>Deploying the system and order execution</li>
+<li>Evaluating the performance of the system</li>
+</ol>
+<p>We follow a simple principle</p>
+<blockquote><p><strong>Don't waste your money</strong></p>
+</blockquote>
+
 </div>
 </div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Slide-1">Slide 1<a class="anchor-link" href="#Slide-1">&#182;</a></h2>
+<h2 id="Primer-on-financial-concepts">Primer on financial concepts<a class="anchor-link" href="#Primer-on-financial-concepts">&#182;</a></h2><p>A short primer on risk and return calculations. This is more of a practical explanation; so take it with a grain of salt</p>
+
 </div>
 </div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Slide-2">Slide 2<a class="anchor-link" href="#Slide-2">&#182;</a></h2>
-</div>
-</div>
-</div></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>This is sub slide 1</strong></p>
+<h2 id="Putting-it-simply">Putting it simply<a class="anchor-link" href="#Putting-it-simply">&#182;</a></h2><blockquote><h3 id="Risk-is-the-amount-of-money-you-are-willing-to-lose"><strong>Risk</strong> is the amount of money you are willing to lose<a class="anchor-link" href="#Risk-is-the-amount-of-money-you-are-willing-to-lose">&#182;</a></h3><h3 id="Return-is-the-amount-of-money-you-expect-to-gain"><strong>Return</strong> is the amount of money you expect to gain<a class="anchor-link" href="#Return-is-the-amount-of-money-you-expect-to-gain">&#182;</a></h3>
+</blockquote>
 
 </div>
 </div>
@@ -13271,7 +13278,73 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>This is sub slide 2</strong></p>
+<p>A risk to return ratio of 1:2 mean you are willing to lose 1 rupee if you expect a gain of 2 rupees.</p>
+<p>The risk-reward ratio is often misleading since</p>
+<ul>
+<li>there are no probabilities attached to the risk and return</li>
+<li>we strictly expect either we lose 1 or gain 2 but in practice we may end up between these two cases most of the time</li>
+</ul>
+<p>So, we would be using <strong>payoff</strong> to evaluate strategies</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Payoff is the amount of money you would expect to receive for the amount of investment made.</p>
+<p>It is the average returns and losses multiplied by the probability of returns and losses. Let's look at an example</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's assume a trading strategy with a risk-reward ratio of 1:2 with the following details</p>
+<ul>
+<li>lose 1 - 30% of the time</li>
+<li>gain 2 - 20% of the time</li>
+<li>makes 0 - 50% of the time</li>
+</ul>
+<p>Then the pay off is</p>
+<p><code>-1*0.3 + 2*0.2 + 0*0.5 = 0.1</code></p>
+<p>So, you would making 0.1 for every rupee invested.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Payoff makes decision making easier. A positive payoff is favorable while a negative payoff is unfavorable</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Warning</strong></p>
+<p>We expect these probabilities in the long run based on history. So, we would very well end up in loss in the short or medium term even if our probabilities turn out to be right.</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rule-01">Rule 01<a class="anchor-link" href="#Rule-01">&#182;</a></h3><blockquote><h3 id="Risk-is-very-very-personal">Risk is very very personal<a class="anchor-link" href="#Risk-is-very-very-personal">&#182;</a></h3>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rule-02">Rule 02<a class="anchor-link" href="#Rule-02">&#182;</a></h3><blockquote><h3 id="Returns-are-always-expectations-unless-realized">Returns are always expectations unless realized<a class="anchor-link" href="#Returns-are-always-expectations-unless-realized">&#182;</a></h3>
+</blockquote>
 
 </div>
 </div>
