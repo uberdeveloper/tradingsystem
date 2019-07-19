@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>Test slides</title>
+<title>Basic slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13261,7 +13261,7 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Primer-on-financial-concepts">Primer on financial concepts<a class="anchor-link" href="#Primer-on-financial-concepts">&#182;</a></h2><p>A short primer on risk and return calculations. This is more of a practical explanation; so take it with a grain of salt</p>
+<h1 id="Primer-on-financial-concepts">Primer on financial concepts<a class="anchor-link" href="#Primer-on-financial-concepts">&#182;</a></h1><p>A short primer on risk and return calculations. This is more of a practical explanation; so take it with a grain of salt.</p>
 
 </div>
 </div>
@@ -13348,6 +13348,126 @@ a.anchor-link {
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Return-calculations">Return calculations<a class="anchor-link" href="#Return-calculations">&#182;</a></h3><p>Return calculation is similar to net profit calculation</p>
+<p>$Profit = Sell \ Value - Buy \ Value$</p>
+<p>$Returns = \frac{Sell Value - Buy Value}{Buy Value}$</p>
+<p>In case of annualized returns, then</p>
+<p>$Annualized Returns = \frac{Sell Value - Buy Value}{Buy Value} * \frac{365}{holding\ period}$</p>
+<ul>
+<li>Holding period is the period you held the investment</li>
+<li>Buy and sell value is the quantity multiplied by average price</li>
+</ul>
+<h1 id="Warning">Warning<a class="anchor-link" href="#Warning">&#182;</a></h1><blockquote><p>Annualized return is not the actual return (unless the holding period is exactly 365 days). We are just proportionately calculating the returns based on the holding period. So if the holding period is 2 months, we assume we would get these returns for the rest of the year, which is quite impractical. Thus we must distinguish properly between holding period returns and annualized returns.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Rule-03">Rule 03<a class="anchor-link" href="#Rule-03">&#182;</a></h3><blockquote><h3 id="Know-your-assumptions-and-always-write-them-down">Know your assumptions and always write them down<a class="anchor-link" href="#Know-your-assumptions-and-always-write-them-down">&#182;</a></h3>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Example</strong></p>
+<p>100 units of stock A is bought on 1st JAN 2019 for 2500 and sold on 25th MAR 2019 for 2620. Calculate the returns</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Inputs</span>
+<span class="n">buy_price</span> <span class="o">=</span> <span class="mi">2500</span>
+<span class="n">buy_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2019-01-01&#39;</span><span class="p">)</span>
+<span class="n">sell_price</span> <span class="o">=</span> <span class="mi">2620</span>
+<span class="n">sell_date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="s1">&#39;2019-03-25&#39;</span><span class="p">)</span>
+<span class="n">qty</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Calculations</span>
+<span class="n">buy_value</span> <span class="o">=</span> <span class="n">buy_price</span> <span class="o">*</span> <span class="n">qty</span>
+<span class="n">sell_value</span> <span class="o">=</span> <span class="n">sell_price</span> <span class="o">*</span> <span class="n">qty</span>
+<span class="n">holding_period</span> <span class="o">=</span> <span class="p">(</span><span class="n">sell_date</span> <span class="o">-</span> <span class="n">buy_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span> <span class="c1"># Using pandas attribute to get the days</span>
+
+<span class="c1"># Outputs</span>
+<span class="n">profit</span> <span class="o">=</span> <span class="n">sell_value</span> <span class="o">-</span> <span class="n">buy_value</span>
+<span class="n">returns</span> <span class="o">=</span> <span class="p">(</span><span class="n">sell_value</span> <span class="o">-</span> <span class="n">buy_value</span><span class="p">)</span><span class="o">/</span><span class="n">buy_value</span>
+<span class="n">annualized_return</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">*</span> <span class="p">(</span><span class="mi">365</span><span class="o">/</span><span class="n">holding_period</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Net profit  = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">profit</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Returns for the period = </span><span class="si">{:.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">returns</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Annualized returns = </span><span class="si">{:.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">annualized_return</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Net profit  = 12000
+Returns for the period = 4.80%
+Annualized returns = 21.11%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Exercise 01 - Calculate the returns</span>
+<span class="c1"># 1000 units of an index bought for 11000</span>
+<span class="c1"># and sold for 12000 after holding for 60 days</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Exercise 02 - Calculate the returns</span>
+<span class="c1"># 100 units of a stock bought on 1st JAN 2018 for 3400</span>
+<span class="c1"># and sold for 3185 on 20th JULY 2019</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div></section></section>
 </div>
 </div>
